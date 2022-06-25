@@ -1,12 +1,14 @@
 # Connect-server
 
-#This server I have created to serve "iiuc connect", the is was created focusing on creating
+### This server I have created to serve "iiuc connect", the is was created focusing on creating
 
  * Moduler code
  * Middleware function
  * Token generate & use
 
-------------About---------
+
+
+# About
 
 * I have used expressjs framework
 * I have used MongoDB as my db
