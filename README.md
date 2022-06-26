@@ -1,6 +1,6 @@
 # Connect-server
 
-### This server I have created to serve "iiuc connect", the is was created focusing on creating
+### This server I have created to serve "iiuc connect", the is was created focusing on,
 
  * Moduler code
  * Middleware function

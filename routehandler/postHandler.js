@@ -41,6 +41,21 @@ const addProfileData = (myResult, response) => {
     }
 }
 
+//Function to return all the post of a user at the time of posting
+const instantload_post=(res,mail)=>{
+    postCollection.find({ usermail: mail }).sort({ "date": -1 })
+    .then((data, err) => {
+        if (data) {
+            addProfileData(data, res);
+        }
+        else if (err) {
+            res.status(500).json({
+                message: "There was a server side error!"
+            })
+        }
+    })
+}
+
 //Get all post
 postRouter.get('/', checkLogin, (req, res) => {
     postCollection.find({}).sort({ "date": -1 })
@@ -179,9 +194,7 @@ postRouter.post('/addpostnoimg',checkLogin, async (req, res) => {
             })
         }
         else {
-            res.status(200).json({
-                message: "Data inserted successfully"
-            })
+            instantload_post(res,req.body.usermail);
         }
     })
 })
@@ -236,23 +249,22 @@ postRouter.post('/addpostimg',checkLogin, async (req, res) => {
             })
         }
         else {
-            res.status(200).json({
-                message: "Data inserted successfully"
-            })
+            instantload_post(res,usermail);
         }
     })
 })
 
 //Get all the post as clicked users mail
 postRouter.get('/userspost/:email',checkLogin, (req, res) => {
-    postCollection.find({ usermail: req.params.email }, (err, data) => {
-        if (err) {
+    postCollection.find({ usermail: req.params.email }).sort({ "date": -1 })
+    .then((data, err) => {
+        if (data) {
+            addProfileData(data, res);
+        }
+        else if (err) {
             res.status(500).json({
                 message: "There was a server side error!"
             })
-        }
-        else if (data) {
-            addProfileData(data, res);
         }
     })
 })
